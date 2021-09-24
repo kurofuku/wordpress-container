@@ -31,4 +31,5 @@ services:
     MYSQL_PASSWORD: wordpress
     MYSQL_DATABASE: bitnami_wordpress
    volumes:
+    - ./db/accelerate.conf:/etc/mysql/conf.d/accelerate.conf
     - ./mysql:/var/lib/mysql
