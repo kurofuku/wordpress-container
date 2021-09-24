@@ -25,6 +25,7 @@ services:
     - ./html:/var/www/html
    tmpfs:
     - /var/www/html/wp-content/cache/autoptimize/1
+    - /tmp/wordpress
 
   db:
    image: jsurf/rpi-mariadb:latest
