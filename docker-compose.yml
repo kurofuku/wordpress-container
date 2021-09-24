@@ -23,6 +23,8 @@ services:
     - db
    volumes:
     - ./html:/var/www/html
+   tmpfs:
+    - /var/www/html/wp-content/cache/autoptimize/1
 
   db:
    image: jsurf/rpi-mariadb:latest
