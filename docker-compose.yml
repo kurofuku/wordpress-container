@@ -24,7 +24,7 @@ services:
    volumes:
     - ./html:/var/www/html
    tmpfs:
-    - /var/www/html/wp-content/cache/autoptimize/1
+    - /var/www/html/wp-content/cache/autoptimize/1::uid=33,gid=33
     - /tmp/wordpress
 
   db:
