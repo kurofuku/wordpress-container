@@ -12,8 +12,10 @@ services:
     - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     - ./nginx/conf.d:/etc/nginx/conf.d
     - ./html:/var/www/html
+    - php_socket:/var/run
    tmpfs:
     - /var/cache/nginx/fastcgi_cache
+    - /var/cache/nginx/fastcgi_temp
 
   wordpress:
    build:
@@ -22,10 +24,12 @@ services:
    links:
     - db
    volumes:
+    - ./wordpress/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
     - ./html:/var/www/html
+    - php_socket:/var/run
    tmpfs:
-    - /var/www/html/wp-content/cache/autoptimize/1:uid=33,gid=33
-    - /tmp/wordpress
+    - /var/www/html/wp-content/plugins/001-prime-strategy-translate-accelerator/cache:uid=33,gid=33
+    - /tmp/wordpress:uid=33,gid=33
 
   db:
    image: jsurf/rpi-mariadb:latest
@@ -38,3 +42,7 @@ services:
    volumes:
     - ./db/accelerate.conf:/etc/mysql/conf.d/accelerate.conf
     - ./mysql:/var/lib/mysql
+    - php_socket:/var/run
+
+volumes:
+  php_socket:
