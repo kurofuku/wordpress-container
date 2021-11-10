@@ -2,7 +2,8 @@ version: '3.1'
 
 services:
   nginx:
-   image: nginx:latest
+   build:
+     context: nginx
    restart: always
    links:
     - wordpress
