@@ -3,7 +3,7 @@ FROM		php:fpm-buster
 RUN			\
 			# Update to latest
 			apt -y update && \
-			apt -y install default-mysql-client libmagickwand-dev && \
+			apt -y install default-mysql-client libmagickwand-dev libjpeg-progs optipng gifsicle && \
 			pecl install apcu imagick && \
 			echo "extension=apcu.so" > $PHP_INI_DIR/conf.d/apcu.ini && \
 			docker-php-ext-install mysqli opcache bcmath && \
