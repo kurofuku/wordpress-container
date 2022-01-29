@@ -2,8 +2,7 @@ version: '3.1'
 
 services:
   nginx:
-   build:
-     context: nginx
+   image: owasp/modsecurity-crs:nginx
    restart: always
    links:
     - wordpress
