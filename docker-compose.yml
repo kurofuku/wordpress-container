@@ -11,12 +11,16 @@ services:
    volumes:
     - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     - ./nginx/conf.d:/etc/nginx/conf.d
-    - ./html:/var/www/html
+    - /mnt/partition2/wordpress-container/html:/var/www/html
     - wordpress_var_run:/var/run
    command: >
-    /bin/sh -c "echo 'SecRuleRemoveById 942100' >  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
+    /bin/sh -c "echo 'SecRuleRemoveById 921110' >  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
+    echo 'SecRuleRemoveById 941160'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRuleRemoveById 941180'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRuleRemoveById 941310'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
+    echo 'SecRuleRemoveById 942100'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
+    echo 'SecRuleRemoveById 953100'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
+    echo 'SecRuleRemoveById 959100'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRuleRemoveById 200002'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRuleRemoveById 200003'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRequestBodyLimit 134217728'       >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
@@ -33,10 +37,10 @@ services:
     - db
    volumes:
     - ./wordpress/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
-    - ./html:/var/www/html
+    - /mnt/partition2/wordpress-container/html:/var/www/html
     - wordpress_var_run:/var/run
    tmpfs:
-    - /var/www/html/wp-content/plugins/001-prime-strategy-translate-accelerator/cache:uid=33,gid=33
+    #- /var/www/html/wp-content/plugins/001-prime-strategy-translate-accelerator/cache:uid=33,gid=33
     - /tmp/wordpress:uid=33,gid=33
 
   db:
@@ -49,7 +53,7 @@ services:
     MYSQL_DATABASE: bitnami_wordpress
    volumes:
     - ./db/accelerate.conf:/etc/mysql/conf.d/accelerate.conf
-    - ./mysql:/var/lib/mysql
+    - /mnt/partition2/wordpress-container/mysql:/var/lib/mysql
     - wordpress_var_run:/var/run
 
 volumes:
