@@ -15,15 +15,18 @@ services:
     - wordpress_var_run:/var/run
    command: >
     /bin/sh -c "echo 'SecRuleRemoveById 921110' >  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
+    echo 'SecRuleRemoveById 932130'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
+    echo 'SecRuleRemoveById 941100'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRuleRemoveById 941160'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRuleRemoveById 941180'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRuleRemoveById 941310'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRuleRemoveById 942100'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
+    echo 'SecRuleRemoveById 949110'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRuleRemoveById 953100'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRuleRemoveById 959100'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRuleRemoveById 200002'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRuleRemoveById 200003'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
-    echo 'SecRequestBodyLimit 134217728'       >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
+    echo 'SecRequestBodyLimit 536870912'       >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     nginx -g 'daemon off;'"
    tmpfs:
     - /var/cache/nginx/fastcgi_cache
