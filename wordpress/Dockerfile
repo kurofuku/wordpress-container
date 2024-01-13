@@ -10,8 +10,9 @@ RUN			\
 			echo "extension=apcu.so" > $PHP_INI_DIR/conf.d/apcu.ini && \
 			docker-php-ext-install mysqli opcache bcmath exif zip intl && \
 			docker-php-ext-enable mysqli opcache bcmath imagick exif zip intl && \
-			echo "post_max_size=128M" >  $PHP_INI_DIR/conf.d/upload_size.ini && \
-			echo "upload_max_filesize=128M" >> $PHP_INI_DIR/conf.d/upload_size.ini && \
+			echo "post_max_size=512M" >  $PHP_INI_DIR/conf.d/upload_size.ini && \
+			echo "upload_max_filesize=512M" >> $PHP_INI_DIR/conf.d/upload_size.ini && \
+			echo "memory_limit = 512M" >> $PHP_INI_DIR/conf.d/memory_limit.ini && \
 			# Install cwebp from source code
 			curl https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.2.2.tar.gz --output /root/libwebp.tar.gz && \
 			cd /root && tar zxf libwebp.tar.gz && \
