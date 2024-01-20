@@ -56,7 +56,7 @@ services:
     - /tmp/wordpress:uid=33,gid=33
 
   db:
-   image: jsurf/rpi-mariadb:latest
+   image: mariadb:latest
    restart: always
    env_file: ./.env
    volumes:
