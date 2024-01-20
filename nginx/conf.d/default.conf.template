@@ -1,5 +1,5 @@
 server {
-  server_name linuxfun.org www.linuxfun.org;
+  server_name ${NGINX_SERVER_NAME} ${NGINX_WWW_SERVER_NAME};
   listen 80;
   listen [::]:80;
 
