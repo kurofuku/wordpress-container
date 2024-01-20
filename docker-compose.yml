@@ -32,6 +32,8 @@ services:
     echo 'SecRuleRemoveById 200002'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRuleRemoveById 200003'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRequestBodyLimit 536870912'       >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
+    envsubst < /etc/nginx/templates/modsecurity.d/setup.conf.template > /etc/modsecurity.d/setup.conf &&
+    envsubst < /etc/nginx/templates/modsecurity.d/modsecurity-override.conf.template > /etc/modsecurity.d/modsecurity-override.conf &&
     nginx -g 'daemon off;'"
    tmpfs:
     - /var/cache/nginx/fastcgi_cache
