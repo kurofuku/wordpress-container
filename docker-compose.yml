@@ -25,6 +25,7 @@ services:
     echo 'SecRuleRemoveById 949110'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRuleRemoveById 953100'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRuleRemoveById 950140'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
+    echo 'SecRuleRemoveById 951240'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRuleRemoveById 959100'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRuleRemoveById 200002'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
     echo 'SecRuleRemoveById 200003'            >>  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
