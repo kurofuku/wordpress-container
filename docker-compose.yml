@@ -4,16 +4,17 @@ services:
   nginx:
    image: owasp/modsecurity-crs:nginx
    restart: always
+   env_file: ./.env
    links:
     - wordpress
    ports:
-    - 9080:80
+    - $HOST_NGINX_PORT:$CONTAINER_NGINX_PORT
    volumes:
     - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     - ./nginx/conf.d:/etc/nginx/conf.d
     - ./modsecurity.d/setup.conf:/etc/modsecurity.d/setup.conf
     - ./modsecurity.d/modsecurity-override.conf:/etc/modsecurity.d/modsecurity-override.conf
-    - /mnt/partition2/wordpress-container/html:/var/www/html
+    - $HOST_WEBROOT_DIR:$CONTAINER_WEBROOT_DIR
     - wordpress_var_run:/var/run
    command: >
     /bin/sh -c "echo 'SecRuleRemoveById 921110' >  /etc/modsecurity.d/owasp-crs/rules/zz-wordpress.conf &&
@@ -43,27 +44,24 @@ services:
    build:
     context: wordpress
    restart: always
+   env_file: ./.env
    links:
     - db
    volumes:
     - ./wordpress/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
-    - /mnt/partition2/wordpress-container/html:/var/www/html
+    - $HOST_WEBROOT_DIR:$CONTAINER_WEBROOT_DIR
     - wordpress_var_run:/var/run
    tmpfs:
-    #- /var/www/html/wp-content/plugins/001-prime-strategy-translate-accelerator/cache:uid=33,gid=33
+    #- $CONTAINER_WEBROOT_DIR/wp-content/plugins/001-prime-strategy-translate-accelerator/cache:uid=33,gid=33
     - /tmp/wordpress:uid=33,gid=33
 
   db:
    image: jsurf/rpi-mariadb:latest
    restart: always
-   environment:
-    MYSQL_ROOT_PASSWORD: root
-    MYSQL_USER: wordpress
-    MYSQL_PASSWORD: wordpress
-    MYSQL_DATABASE: bitnami_wordpress
+   env_file: ./.env
    volumes:
     - ./db/accelerate.conf:/etc/mysql/conf.d/accelerate.conf
-    - /mnt/partition2/wordpress-container/mysql:/var/lib/mysql
+    - $HOST_MYSQL_DIR:$CONTAINER_MYSQL_DIR
     - wordpress_var_run:/var/run
 
 volumes:
